@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: glamstock_db
+    restart: always
+    environment:
+      POSTGRES_USER: glamstock_user
+      POSTGRES_PASSWORD: glamstock_pass
+      POSTGRES_DB: glamstock_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./migrations/01_schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+      - ./migrations/02_index.sql:/docker-entrypoint-initdb.d/02_index.sql
+      - ./migrations/03_seed.sql:/docker-entrypoint-initdb.d/03_seed.sql
+      - ./migrations/04_views.sql:/docker-entrypoint-initdb.d/04_views.sql
+
+volumes:
+  postgres_data:
