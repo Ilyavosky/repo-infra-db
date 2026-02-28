@@ -21,8 +21,8 @@ ON CONFLICT (descripcion) DO NOTHING;
 INSERT INTO usuarios (nombre, email, password_hash, rol, activo) VALUES
 (
   'Administrador',
-  :'admin_email',
-  crypt(:'admin_password', gen_salt('bf')),
+  'admin@glamstock.com',
+  crypt('Admin1234!', gen_salt('bf')),
   'ADMIN',
   TRUE
 )
