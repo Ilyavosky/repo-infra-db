@@ -40,22 +40,22 @@ INSERT INTO usuarios (nombre, email, password_hash, rol, activo) VALUES
 ON CONFLICT (email) DO NOTHING;
 
 -- Productos maestros
-INSERT INTO productos_maestros (sku, nombre) VALUES
-('BOL-001', 'Bolsa Kelly'),
-('BOL-002', 'Bolsa Birkin'),
-('BOL-003', 'Bolsa Tote Canvas'),
-('BOL-004', 'Bolsa Crossbody Mini'),
-('BOL-005', 'Bolsa Shopper Grande'),
-('CAR-001', 'Cartera Bifold'),
-('CAR-002', 'Cartera Zip Around'),
-('CAR-003', 'Cartera Slim'),
-('MOC-001', 'Mochila Urbana'),
-('MOC-002', 'Mochila Casual'),
-('CIN-001', 'Cinturón Clásico Piel'),
-('CIN-002', 'Cinturón Reversible'),
-('MON-001', 'Monedero Redondo'),
-('MON-002', 'Monedero Rectangular'),
-('KIT-001', 'Kit Bolsa + Cartera')
+INSERT INTO productos_maestros (sku, nombre, proveedor) VALUES
+('BOL-001', 'Bolsa Kelly',            'Distribuidora Moda MX'),
+('BOL-002', 'Bolsa Birkin',           'Distribuidora Moda MX'),
+('BOL-003', 'Bolsa Tote Canvas',      'Importaciones Chic'),
+('BOL-004', 'Bolsa Crossbody Mini',   'Importaciones Chic'),
+('BOL-005', 'Bolsa Shopper Grande',   'Proveedora Sur'),
+('CAR-001', 'Cartera Bifold',         'Proveedora Sur'),
+('CAR-002', 'Cartera Zip Around',     'Accesorios Premium SA'),
+('CAR-003', 'Cartera Slim',           'Accesorios Premium SA'),
+('MOC-001', 'Mochila Urbana',         'Distribuidora Moda MX'),
+('MOC-002', 'Mochila Casual',         'Importaciones Chic'),
+('CIN-001', 'Cinturón Clásico Piel',  'Proveedora Sur'),
+('CIN-002', 'Cinturón Reversible',    'Proveedora Sur'),
+('MON-001', 'Monedero Redondo',       'Accesorios Premium SA'),
+('MON-002', 'Monedero Rectangular',   'Accesorios Premium SA'),
+('KIT-001', 'Kit Bolsa + Cartera',    'Distribuidora Moda MX')
 ON CONFLICT (sku) DO NOTHING;
 
 -- Variantes
@@ -171,7 +171,7 @@ CROSS JOIN sucursales s
 WHERE s.nombre_lugar = 'Tienda Terán'
 ON CONFLICT (id_variante, id_sucursal) DO NOTHING;
 
--- Inventario por sucursal (Bodega Principal - mayor stock)
+-- Inventario por sucursal (Bodega Principal)
 INSERT INTO inventario_sucursal (id_variante, id_sucursal, stock_actual)
 SELECT v.id_variante, s.id_sucursal,
   CASE
