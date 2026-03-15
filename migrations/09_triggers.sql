@@ -3,8 +3,8 @@ RETURNS TRIGGER
 LANGUAGE plpgsql
 AS $$
 DECLARE
-  v_precio_adquisicion  DECIMAL(12,2);
-  v_precio_etiqueta     DECIMAL(12,2);
+  v_precio_adquisicion DECIMAL(12,2);
+  v_precio_etiqueta DECIMAL(12,2);
 BEGIN
   SELECT precio_adquisicion, precio_venta_etiqueta
   INTO v_precio_adquisicion, v_precio_etiqueta

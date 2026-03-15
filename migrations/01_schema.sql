@@ -84,7 +84,6 @@ CREATE TABLE IF NOT EXISTS ventas_bajas (
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE RESTRICT
 );
 
-
 -- Función genérica para actualizar timestamps
 CREATE OR REPLACE FUNCTION update_timestamp()
 RETURNS TRIGGER AS $$

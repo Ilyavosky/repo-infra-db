@@ -1,15 +1,15 @@
 CREATE OR REPLACE PROCEDURE sp_registrar_venta(
-  p_id_variante       INTEGER,
-  p_id_sucursal       INTEGER,
-  p_id_motivo         INTEGER,
-  p_id_usuario        INTEGER,
-  p_cantidad          INTEGER,
+  p_id_variante INTEGER,
+  p_id_sucursal INTEGER,
+  p_id_motivo INTEGER,
+  p_id_usuario INTEGER,
+  p_cantidad INTEGER,
   p_precio_venta_final DECIMAL(12,2)
 )
 LANGUAGE plpgsql
 AS $$
 DECLARE
-  v_stock             INTEGER;
+  v_stock INTEGER;
   v_precio_adquisicion DECIMAL(12,2);
 BEGIN
   SELECT inv.stock_actual, v.precio_adquisicion
@@ -43,10 +43,10 @@ END;
 $$;
 
 CREATE OR REPLACE PROCEDURE sp_transferir_stock(
-  p_id_variante    INTEGER,
-  p_id_sucursal_origen  INTEGER,
+  p_id_variante INTEGER,
+  p_id_sucursal_origen INTEGER,
   p_id_sucursal_destino INTEGER,
-  p_cantidad       INTEGER
+  p_cantidad INTEGER
 )
 LANGUAGE plpgsql
 AS $$
@@ -88,7 +88,7 @@ END;
 $$;
 
 CREATE OR REPLACE PROCEDURE sp_ajustar_precios_producto(
-  p_id_producto    INTEGER,
+  p_id_producto INTEGER,
   p_incremento_pct DECIMAL(5,2)
 )
 LANGUAGE plpgsql
@@ -98,7 +98,7 @@ DECLARE
     SELECT id_variante, precio_adquisicion, precio_venta_etiqueta
     FROM variantes
     WHERE id_producto_maestro = p_id_producto;
-  rec            RECORD;
+  rec RECORD;
   v_nuevo_precio DECIMAL(12,2);
 BEGIN
   IF NOT EXISTS (SELECT 1 FROM productos_maestros WHERE id_producto_maestro = p_id_producto) THEN

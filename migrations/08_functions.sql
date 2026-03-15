@@ -15,12 +15,12 @@ $$;
 
 CREATE OR REPLACE FUNCTION fn_variantes_por_sucursal(p_id_sucursal INTEGER)
 RETURNS TABLE (
-  id_variante          INTEGER,
-  nombre_producto      VARCHAR,
-  sku_variante         VARCHAR,
-  modelo               VARCHAR,
-  color                VARCHAR,
-  stock_actual         INTEGER,
+  id_variante INTEGER,
+  nombre_producto VARCHAR,
+  sku_variante VARCHAR,
+  modelo VARCHAR,
+  color VARCHAR,
+  stock_actual INTEGER,
   precio_adquisicion   DECIMAL(12,2),
   precio_venta_etiqueta DECIMAL(12,2),
   margen_pct           DECIMAL(5,2)
@@ -44,9 +44,9 @@ BEGIN
     v.precio_venta_etiqueta,
     fn_margen_porcentaje(v.precio_adquisicion, v.precio_venta_etiqueta)
   FROM inventario_sucursal inv
-  JOIN variantes v          ON inv.id_variante        = v.id_variante
+  JOIN variantes v ON inv.id_variante = v.id_variante
   JOIN productos_maestros pm ON v.id_producto_maestro = pm.id_producto_maestro
-  WHERE inv.id_sucursal  = p_id_sucursal
+  WHERE inv.id_sucursal = p_id_sucursal
     AND inv.stock_actual > 0
   ORDER BY pm.nombre, v.modelo, v.color;
 END;
