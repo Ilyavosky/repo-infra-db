@@ -1,0 +1,1 @@
+ALTER TABLE variantes ADD COLUMN IF NOT EXISTS fecha_compra DATE;
