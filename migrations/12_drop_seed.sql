@@ -1,0 +1,13 @@
+BEGIN;
+
+TRUNCATE TABLE ventas_bajas      RESTART IDENTITY CASCADE;
+TRUNCATE TABLE inventario_sucursal RESTART IDENTITY CASCADE;
+TRUNCATE TABLE variantes         RESTART IDENTITY CASCADE;
+TRUNCATE TABLE productos_maestros RESTART IDENTITY CASCADE;
+
+DELETE FROM usuarios WHERE email IN ('admin@glamstock.com', 'gerente@glamstock.com');
+
+TRUNCATE TABLE motivos_transaccion RESTART IDENTITY CASCADE;
+TRUNCATE TABLE sucursales          RESTART IDENTITY CASCADE;
+
+COMMIT;
